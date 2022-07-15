@@ -32,10 +32,14 @@ export default function App() {
     setItemSelected(itemList.find(item => item.id === id));
     setModalVisible(!modalVisible);
   }
-  useEffect(()=>{  //se ejecuta siempre, no está bien hacerlo así
-
-  });
+  const loadDataOnlyOnce = () => {
+    products.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj.alt, image: obj.image}])); 
+    console.log(itemList);
+  }
+  // useEffect(()=>{  //se ejecuta siempre, no está bien hacerlo así
+  // });
   useEffect(()=>{ // se ejecuta al cargar el componente
+    loadDataOnlyOnce(); 
     console.log('se cargó el componente');
 
   }, []);
@@ -66,11 +70,8 @@ export default function App() {
             <Button onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' />
           </View> 
         </View> 
-
       </Modal>
-      {/*  */}
-      {/*  */}
-      {/*  */}
+
       <View style={styles.inputContainer}>
         {/* <Text>Hola, Coder! by Buxi</Text>
         <StatusBar style="auto" /> */}
@@ -83,15 +84,11 @@ export default function App() {
         <Button title='Add' onPress={onHandlerAddItem} disabled={textItem.length <1 ? true: false  }/>
       </View> 
       <ItemList 
-        db={products}
+        // db={products}
+        db={itemList}
+
         onHandlerModal = {console.log}     
       />
-      {/* <Text>{textItem}</Text> */}
-      {/* <View >
-        {
-          itemList.map(item => <View key={item.id} style={styles.item}> <Text>{item.value}</Text><Text>{item.id}</Text></View>)
-        }
-      </View> */}
       <FlatList
         data={itemList}
         renderItem={data => (

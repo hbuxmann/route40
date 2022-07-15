@@ -38,47 +38,30 @@ const ItemList = (props) => {
         db.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj}])); 
         console.log(itemList);
     }
-
-    // useEffect(()=>{ // se ejecuta al cargar el componente
-    //     console.log('se cargó el componente Lista Item');
-    //     // json = <Text>{JSON.stringify(db)}</Text>; 
-    //     console.log(JSON.stringify(db));
-    //     db.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj}])); 
-    //     console.log(itemList);  
-    //   }, []);
-
-    //   useEffect(()=>{ // se ejecuta al cargar el componente
-    //     console.log('se cargó el componente Lista Item');
-    //     // json = <Text>{JSON.stringify(db)}</Text>; 
-    //     console.log(JSON.stringify(db));
-    //     db.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj}])); 
-    //     console.log(itemList);  
-    //   });
-
-        useEffect(()=>{ // se ejecuta al cargar el componente
+    useEffect(()=>{ // se ejecuta al cargar el componente
         console.log('se cargó el componente Lista Item');
-        loadDataOnlyOnce();
- 
-      }, []);
+        // loadDataOnlyOnce(); 
+
+        setItemList(db);
+    }, []);
 
     return (
-
-    <FlatList
-        data={itemList}
-        renderItem={data => (
-        <TouchableOpacity onPress={ ()=> onHandlerModal(data.item.id)} >
-            {/* <Text >{data.item.value.alt}</Text>         */}
-            <Item 
-                desc={data.item.value.alt}
-                image={data.item.value.image}
-            />
-        </TouchableOpacity>
-        )}
-        keyExtractor= {(item) => item.id}
-    />
-    
-
-  );
+        <FlatList
+            data={db}
+            renderItem={data => (
+            <TouchableOpacity onPress={ ()=> onHandlerModal(data.item.id)} >
+                {/* <Text >{data.item.value.alt}</Text>         */}
+                <Item 
+                    // desc={data.item.value.alt}
+                    // image={data.item.value.image}
+                    desc={data.item.value}
+                    image={data.item.image}
+                />
+            </TouchableOpacity>
+            )}
+            keyExtractor= {(item) => item.id}
+        />
+    );
 }
 
 export default ItemList;

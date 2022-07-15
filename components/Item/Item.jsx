@@ -28,30 +28,16 @@ const styles = StyleSheet.create({
 });
 
 const Item = (props) => {
-    
-
     const {desc, image} = props;
-    // const sourceImage = "../../images/"+image;
-    // let staticImage = require(sourceImage);
-    // const staticImage = require(image);
-    // console.log(image);
-    // console.log(sourceImage);
-
-
-  return (
-    <View style={styles.container}>
-      <Text>{desc}</Text>
-      <Image
-        style={styles.item}
-        // source={require('@expo/assets/adaptive-icon.png')}
-        // source={require('../../images/cbr300.jpg')}
-        source={image}
-
-        // source={staticImage}
-
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+        <Text>{desc}</Text>
+        <Image
+            style={styles.item}
+            source={image}
+        />
+        </View>
+    );
 }
 
 export default Item;
