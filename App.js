@@ -5,6 +5,7 @@ import Item from './components/Item/Item';
 import ItemList from './components/ItemList/ItemList';
 // import db from './database/products.json';
 import {products} from './database/products';
+import ModalCustum from './components/ModalCustom/ModalCustom';
 
 export default function App() {
 
@@ -26,6 +27,10 @@ export default function App() {
   const onHandlerDeleteItem = id => {
     setItemList(currentItems => currentItems.filter(item => item.id !== id));
     setItemSelected({});
+    setModalVisible(!modalVisible);
+  }
+  const deleteThisFunctionAux = id => {
+    console.log(id);
     setModalVisible(!modalVisible);
   }
   const onHandlerModal = id => {
@@ -51,7 +56,7 @@ export default function App() {
   return (
     // <View style={styles.container}>
     <View style={styles.screen}>
-      <Modal
+      {/* <Modal
         animationType='slide'
         transparent={true}
         visible={modalVisible}
@@ -70,8 +75,12 @@ export default function App() {
             <Button onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' />
           </View> 
         </View> 
-      </Modal>
-
+      </Modal> */}
+      <ModalCustum 
+        itemSelected={itemSelected}
+        onHandlerDeleteItem={deleteThisFunctionAux}
+        modalVisible={modalVisible}
+      />
       <View style={styles.inputContainer}>
         {/* <Text>Hola, Coder! by Buxi</Text>
         <StatusBar style="auto" /> */}
