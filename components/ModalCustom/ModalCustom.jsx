@@ -35,6 +35,7 @@ const ModalCustom = (props) => {
 
 const styles = StyleSheet.create({
      modal : {
+      borderColor: 'black',
       backgroundColor: 'white',
       width: '80%',
       height: '50%',
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
   
     modalTitle : {
-      backgroundColor: 'black',
+      backgroundColor: 'grey',
       color: 'white',
       fontSize: 18
     },
@@ -56,6 +57,8 @@ const styles = StyleSheet.create({
       alignItems: 'center'
     },
     modalButton: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       marginTop: 15
     },
     modalItem: {
