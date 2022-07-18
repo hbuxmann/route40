@@ -5,7 +5,8 @@ import Item from './components/Item/Item';
 import ItemList from './components/ItemList/ItemList';
 // import db from './database/products.json';
 import {products} from './database/products';
-import ModalCustum from './components/ModalCustom/ModalCustom';
+import ModalCustom from './components/ModalCustom/ModalCustom';
+import imageDefault from "./images/default.jpg";
 
 export default function App() {
 
@@ -19,7 +20,7 @@ export default function App() {
 
   const onHandlerAddItem = () => {
     // setItemList(currentItems => [...currentItems, {id:Math.random()*100, value: textItem}]);
-    setItemList(currentItems => [...currentItems, {id: Date.now(), value: textItem}]);
+    setItemList(currentItems => [...currentItems, {id: Date.now(), value: textItem, image: imageDefault}]);
     // setItemList({...itemList, id:Math.random()*100, value: textItem}); //no funciona esta poronga
     setTextItem('');
   }
@@ -76,9 +77,11 @@ export default function App() {
           </View> 
         </View> 
       </Modal> */}
-      <ModalCustum 
+      <ModalCustom 
         itemSelected={itemSelected}
-        onHandlerDeleteItem={deleteThisFunctionAux}
+        // onHandlerDeleteItem={deleteThisFunctionAux}
+        onHandlerDeleteItem={onHandlerDeleteItem}
+
         modalVisible={modalVisible}
       />
       <View style={styles.inputContainer}>
@@ -92,17 +95,21 @@ export default function App() {
         />
         <Button title='Add' onPress={onHandlerAddItem} disabled={textItem.length <1 ? true: false  }/>
       </View> 
-      <ItemList 
+      {/* <ItemList 
         // db={products}
         db={itemList}
-
-        onHandlerModal = {console.log}     
-      />
+        onHandlerDeleteItem={onHandlerDeleteItem}
+        // onHandlerModal = {console.log}     
+      /> */}
       <FlatList
         data={itemList}
         renderItem={data => (
           <TouchableOpacity onPress={ ()=> onHandlerModal(data.item.id)} >
-              <Text style={styles.item}>{data.item.value}</Text>        
+              {/* <Text style={styles.item}>{data.item.value}</Text>         */}
+              <Item 
+                  desc={data.item.value}
+                  image={data.item.image}
+              />
           </TouchableOpacity>
         )}
         keyExtractor= {(item) => item.id}
