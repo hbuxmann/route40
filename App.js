@@ -34,6 +34,9 @@ export default function App() {
     console.log(id);
     setModalVisible(!modalVisible);
   }
+  const onHandlerCancel = id => {
+    setModalVisible(!modalVisible);
+  }
   const onHandlerModal = id => {
     setItemSelected(itemList.find(item => item.id === id));
     setModalVisible(!modalVisible);
@@ -79,8 +82,8 @@ export default function App() {
       </Modal> */}
       <ModalCustom 
         itemSelected={itemSelected}
-        // onHandlerDeleteItem={deleteThisFunctionAux}
         onHandlerDeleteItem={onHandlerDeleteItem}
+        onHandlerCancel={onHandlerCancel}
 
         modalVisible={modalVisible}
       />

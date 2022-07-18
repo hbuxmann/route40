@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 const ModalCustom = (props) => {
 
-    const {itemSelected, onHandlerDeleteItem, modalVisible} = props;
+  const {itemSelected, onHandlerDeleteItem, onHandlerCancel, modalVisible} = props;
   return (
     <Modal
       animationType='slide'
@@ -26,6 +26,7 @@ const ModalCustom = (props) => {
         </View>
         <View style={styles.modalButton}>
           <Button onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' />
+          <Button onPress={ () => onHandlerCancel()} title='Cancelar' />
         </View> 
       </View> 
     </Modal>
