@@ -25,13 +25,19 @@ const ModalCustom = (props) => {
           <View style={styles.modalMessage}>
             <Text style={styles.modalItem}>{itemSelected.value}</Text>
           </View>
+          
           <View style={styles.modalButtonFrame}>
-            <View style={styles.modalButton}><Button  onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' /> </View>
-            <View style={styles.modalButton}><Button style={styles.modalButton} onPress={ () => onHandlerCancel()} title='Cancelar' /></View>
-            
-            {/* <Button  onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' />
-            <Button style={styles.modalButton} onPress={ () => onHandlerCancel()} title='Cancelar' /> */}
-          </View> 
+            {/* 
+            <View style={styles.modalButton}><Button title="Confirmar" onPress={ () => onHandlerDeleteItem(itemSelected.id)} /> </View>
+            <View style={styles.modalButton}><Button title="Cancelar"  onPress={ () => onHandlerCancel()} /></View>
+            */}
+            <View style={styles.modalButton}>
+              <Button title="Confirmar" onPress={ ()=> onHandlerDeleteItem(itemSelected.id)} /> 
+            </View>
+            <View style={styles.modalButton}>
+              <Button title="Cancelar"  onPress={ ()=> onHandlerCancel()} />
+            </View>
+          </View>   
         </View>
       </View> 
     </Modal>

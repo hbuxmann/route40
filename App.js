@@ -30,11 +30,11 @@ export default function App() {
     setItemSelected({});
     setModalVisible(!modalVisible);
   }
-  const deleteThisFunctionAux = id => {
-    console.log(id);
-    setModalVisible(!modalVisible);
-  }
-  const onHandlerCancel = id => {
+  // const deleteThisFunctionAux = id => {
+  //   console.log(id);
+  //   setModalVisible(!modalVisible);
+  // }
+  const onHandlerCancel = () => {
     setModalVisible(!modalVisible);
   }
   const onHandlerModal = id => {
@@ -108,6 +108,7 @@ export default function App() {
         data={itemList}
         renderItem={data => (
           <TouchableOpacity onPress={ ()=> onHandlerModal(data.item.id)} >
+          {/* <TouchableOpacity onPress={ ()=> console.log(data.item.id)} > */}
               {/* <Text style={styles.item}>{data.item.value}</Text>         */}
               <Item 
                   desc={data.item.value}
