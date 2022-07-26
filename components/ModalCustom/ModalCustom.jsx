@@ -27,10 +27,6 @@ const ModalCustom = (props) => {
           </View>
           
           <View style={styles.modalButtonFrame}>
-            {/* 
-            <View style={styles.modalButton}><Button title="Confirmar" onPress={ () => onHandlerDeleteItem(itemSelected.id)} /> </View>
-            <View style={styles.modalButton}><Button title="Cancelar"  onPress={ () => onHandlerCancel()} /></View>
-            */}
             <View style={styles.modalButton}>
               <Button title="Confirmar" onPress={ ()=> onHandlerDeleteItem(itemSelected.id)} /> 
             </View>

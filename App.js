@@ -1,95 +1,118 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity, Modal} from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button} from 'react-native';
 import { useState, useEffect } from 'react';
-import Item from './components/Item/Item';
+import Header from './components/Header/Header';
+import { useFonts } from 'expo-font';
+
+// import Item from './components/Item/Item';
 import ItemList from './components/ItemList/ItemList';
+import ItemListAdmin from './components/ItemListAdmin/ItemListAdmin';
 // import db from './database/products.json';
 import {products} from './database/products';
-import ModalCustom from './components/ModalCustom/ModalCustom';
-import imageDefault from "./images/default.jpg";
+// import ModalCustom from './components/ModalCustom/ModalCustom';
+// import imageDefault from "./images/default.jpg";
+import Landing from './components/landing/Landing';
 
 export default function App() {
+  const [loaded] = useFonts({
+    OpenSans: require ('./assets/fonts/OpenSans-Regular.ttf'),
+    OpenSansBold: require('./assets/fonts/OpenSans-Bold.ttf'),
 
-  const [textItem, setTextItem] = useState ('');
+  });
+
+  const [navigateTo, setNavigateTo] = useState('Landing');
+  const [productList, setProductList] = useState(products);
+  
+  // const [textItem, setTextItem] = useState ('');
   const [itemList, setItemList] = useState ([]);
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [itemSelected, setItemSelected] = useState({});
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const [itemSelected, setItemSelected] = useState({});
 
-  const onHandlerSetTextItem = (text) => setTextItem(text);
+  // const onHandlerSetTextItem = (text) => setTextItem(text);
 
-  const onHandlerAddItem = () => {
-    // setItemList(currentItems => [...currentItems, {id:Math.random()*100, value: textItem}]);
-    setItemList(currentItems => [...currentItems, {id: Date.now(), value: textItem, image: imageDefault}]);
-    // setItemList({...itemList, id:Math.random()*100, value: textItem}); //no funciona esta poronga
-    setTextItem('');
-  }
+  // const onHandlerAddItem = () => {
+  //   // setItemList(currentItems => [...currentItems, {id:Math.random()*100, value: textItem}]);
+  //   setItemList(currentItems => [...currentItems, {id: Date.now(), value: textItem, image: imageDefault}]);
+  //   // setItemList({...itemList, id:Math.random()*100, value: textItem}); //no funciona esta poronga
+  //   setTextItem('');
+  // }
 
-  const onHandlerDeleteItem = id => {
-    setItemList(currentItems => currentItems.filter(item => item.id !== id));
-    setItemSelected({});
-    setModalVisible(!modalVisible);
-  }
-  // const deleteThisFunctionAux = id => {
-  //   console.log(id);
+  // const onHandlerDeleteItem = id => {
+  //   setItemList(currentItems => currentItems.filter(item => item.id !== id));
+  //   setItemSelected({});
   //   setModalVisible(!modalVisible);
   // }
-  const onHandlerCancel = () => {
-    setModalVisible(!modalVisible);
-  }
-  const onHandlerModal = id => {
-    setItemSelected(itemList.find(item => item.id === id));
-    setModalVisible(!modalVisible);
-  }
+  // // const deleteThisFunctionAux = id => {
+  // //   console.log(id);
+  // //   setModalVisible(!modalVisible);
+  // // }
+  // const onHandlerCancel = () => {
+  //   setModalVisible(!modalVisible);
+  // }
+  // const onHandlerModal = id => {
+  //   setItemSelected(itemList.find(item => item.id === id));
+  //   setModalVisible(!modalVisible);
+  // }
   const loadDataOnlyOnce = () => {
     products.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj.alt, image: obj.image}])); 
     console.log(itemList);
   }
-  // useEffect(()=>{  //se ejecuta siempre, no está bien hacerlo así
-  // });
+  // // useEffect(()=>{  //se ejecuta siempre, no está bien hacerlo así
+  // // });
   useEffect(()=>{ // se ejecuta al cargar el componente
     loadDataOnlyOnce(); 
     console.log('se cargó el componente');
 
   }, []);
-  useEffect(()=>{ // se ejecuta cada vez que se cambia alguna de las variables dentro de los corchetes
-    console.table('Se cambió el itemList -->' + JSON.stringify(itemList));
+  // useEffect(()=>{ // se ejecuta cada vez que se cambia alguna de las variables dentro de los corchetes
+  //   console.table('Se cambió el itemList -->' + JSON.stringify(itemList));
 
-  }, [itemList]);
+  // }, [itemList]);
+  let content = <Text/>;
+
+  switch(navigateTo) {
+    case  'Landing':
+      content = <Landing setNavigateTo={setNavigateTo} />
+      break;
+    case 'ItemListAdmin':
+      content = <ItemListAdmin setNavigateTo={setNavigateTo} itemList={itemList} setItemList={setItemList} />;
+      break;
+    case 'ItemList':
+      // content = <ItemList setNavigateTo={setNavigateTo} products={productList}/>;
+      content = <ItemList setNavigateTo={setNavigateTo} products={itemList}/>;
+
+      break;
+  }
 
   return (
     // <View style={styles.container}>
-    <View style={styles.screen}>
-      {/* <Modal
-        animationType='slide'
-        transparent={true}
-        visible={modalVisible}
-      >        
-        <View style={styles.modal}>          
-          <View style={styles.modalTitle}>
-            <Text>Mi Modal</Text>
-          </View>
-          <View style={styles.modalMessage}>
-            <Text>Estas seguro que quieres borrar?</Text>
-          </View>
-          <View style={styles.modalMessage}>
-            <Text style={styles.modalItem}>{itemSelected.value}</Text>
+    <View>
+      <Header title={'RUTA 40'}/>
+      {content}
+      {/* <Landing /> */}
+      {/* <View style={styles.screen}>
+        <View style={styles.modalButtonFrame}>
+          <View style={styles.modalButton}>
+            <Button title='Listar'/>
           </View>
           <View style={styles.modalButton}>
-            <Button onPress={ () => onHandlerDeleteItem(itemSelected.id)} title='Confirmar' />
-          </View> 
-        </View> 
-      </Modal> */}
-      <ModalCustom 
+            <Button title='Administrar'/>
+          </View>
+        </View>
+      </View> */}
+
+      
+      {/* <ItemList /> */}
+      {/* <ModalCustom 
         itemSelected={itemSelected}
         onHandlerDeleteItem={onHandlerDeleteItem}
         onHandlerCancel={onHandlerCancel}
 
         modalVisible={modalVisible}
       />
+      
       <View style={styles.inputContainer}>
-        {/* <Text>Hola, Coder! by Buxi</Text>
-        <StatusBar style="auto" /> */}
         <TextInput 
           placeholder='Ingrese aquí'
           style={styles.textInput}
@@ -98,18 +121,10 @@ export default function App() {
         />
         <Button title='Add' onPress={onHandlerAddItem} disabled={textItem.length <1 ? true: false  }/>
       </View> 
-      {/* <ItemList 
-        // db={products}
-        db={itemList}
-        onHandlerDeleteItem={onHandlerDeleteItem}
-        // onHandlerModal = {console.log}     
-      /> */}
       <FlatList
         data={itemList}
         renderItem={data => (
           <TouchableOpacity onPress={ ()=> onHandlerModal(data.item.id)} >
-          {/* <TouchableOpacity onPress={ ()=> console.log(data.item.id)} > */}
-              {/* <Text style={styles.item}>{data.item.value}</Text>         */}
               <Item 
                   desc={data.item.value}
                   image={data.item.image}
@@ -117,7 +132,7 @@ export default function App() {
           </TouchableOpacity>
         )}
         keyExtractor= {(item) => item.id}
-      />
+      /> */}
     </View>
   );
 }
@@ -131,7 +146,10 @@ const styles = StyleSheet.create({
   },
 
   screen: {
-    paddingTop : 80
+    // flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    // marginTop: 22
   },
   inputContainer: {
     flexDirection:'row', 
@@ -150,10 +168,6 @@ const styles = StyleSheet.create({
   },
 
   modal : {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // backgroundColor: 'lightgrey'
     backgroundColor: 'white',
     width: '80%',
     height: '50%',
@@ -179,6 +193,17 @@ const styles = StyleSheet.create({
   },
   modalItem: {
     fontSize:  30
-  }
+  },
+  modalButtonFrame: {
+    width: 280,
+    marginTop: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // marginTop: 15
+  },
+  modalButton: {
+    width:120,
+    borderRadius: 15
+  },
   
 });

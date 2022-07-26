@@ -25,13 +25,16 @@ const styles = StyleSheet.create({
     // alignContent: 'center',
     // justifyContent: 'center'
   },
+  itemTitle: {
+    fontFamily: 'OpenSansBold',
+  }
 });
 
 const Item = (props) => {
     const {desc, image} = props;
     return (
         <View style={styles.container}>
-        <Text>{desc}</Text>
+        <Text style={styles.itemTitle}>{desc}</Text>
         <Image
             style={styles.item}
             source={image}
