@@ -18,6 +18,7 @@ const Header = props => {
 const styles = StyleSheet.create( {
 
     header :{
+        // flex: 2,
         width: "100%",
         heigth: 90,
         paddingTop: 36,

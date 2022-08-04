@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity, Modal} from 'react-native';
 import { useState, useEffect } from 'react';
 import Colors from '../../constants/Colors';
+// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Item from '../Item/Item';
 // import Item from './components/Item/Item';
@@ -11,12 +13,19 @@ import imageDefault from "../../images/default.jpg";
 
 
 
-const ItemList = (props) => {
-  const {setNavigateTo, products} = props;
+const ItemList = ({navigation, route}, props) => {
+
+  const dispatch = useDispatch();
+  const products2 = useSelector(state => state.products.products);
+  const {nombre} = route.params;
+  // const {setNavigateTo, products} = props;
+  console.log('Products 2: '+JSON.stringify(products2))
 
   // const [textItem, setTextItem] = useState ('');
   // const [itemList, setItemList] = useState ([]);
-  const [itemList, setItemList] = useState (products);
+  // const [itemList, setItemList] = useState (products);
+  const [itemList, setItemList] = useState (products2);
+
 
 
   // const loadDataOnlyOnce = () => {
@@ -29,7 +38,7 @@ const ItemList = (props) => {
   //   // console.log('se cargó el componente');
   // }, []);
 
-
+  console.log('ItemList: '+nombre);
     return (
       <View style={styles.screen}>
         <View style={styles.inputContainer}>
@@ -37,7 +46,8 @@ const ItemList = (props) => {
             // buttonStyle={styles.button}
             color= {Colors.button}
             title='home' 
-            onPress={ ()=> setNavigateTo('Landing')} 
+            // onPress={ ()=> setNavigateTo('Landing')} 
+            onPress={ ()=> navigation.navigate('Home')} 
           />
         </View> 
         <FlatList

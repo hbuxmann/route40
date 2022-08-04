@@ -7,11 +7,13 @@ import { useFonts } from 'expo-font';
 // import Item from './components/Item/Item';
 import ItemList from './components/ItemList/ItemList';
 import ItemListAdmin from './components/ItemListAdmin/ItemListAdmin';
+import MainNavigator from './components/navigation/MainNavigator/MainNavigator'
+
 // import db from './database/products.json';
 import {products} from './database/products';
-// import ModalCustom from './components/ModalCustom/ModalCustom';
-// import imageDefault from "./images/default.jpg";
-import Landing from './components/landing/Landing';
+import Landing from './components/Landing/Landing';
+import { Provider } from 'react-redux';
+import store from './store';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -20,40 +22,13 @@ export default function App() {
 
   });
 
-  const [navigateTo, setNavigateTo] = useState('Landing');
+  const [navigateTo, setNavigateTo] = useState('');
   const [productList, setProductList] = useState(products);
   
   // const [textItem, setTextItem] = useState ('');
   const [itemList, setItemList] = useState ([]);
 
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const [itemSelected, setItemSelected] = useState({});
 
-  // const onHandlerSetTextItem = (text) => setTextItem(text);
-
-  // const onHandlerAddItem = () => {
-  //   // setItemList(currentItems => [...currentItems, {id:Math.random()*100, value: textItem}]);
-  //   setItemList(currentItems => [...currentItems, {id: Date.now(), value: textItem, image: imageDefault}]);
-  //   // setItemList({...itemList, id:Math.random()*100, value: textItem}); //no funciona esta poronga
-  //   setTextItem('');
-  // }
-
-  // const onHandlerDeleteItem = id => {
-  //   setItemList(currentItems => currentItems.filter(item => item.id !== id));
-  //   setItemSelected({});
-  //   setModalVisible(!modalVisible);
-  // }
-  // // const deleteThisFunctionAux = id => {
-  // //   console.log(id);
-  // //   setModalVisible(!modalVisible);
-  // // }
-  // const onHandlerCancel = () => {
-  //   setModalVisible(!modalVisible);
-  // }
-  // const onHandlerModal = id => {
-  //   setItemSelected(itemList.find(item => item.id === id));
-  //   setModalVisible(!modalVisible);
-  // }
   const loadDataOnlyOnce = () => {
     products.map(obj => setItemList(currentItems => [...currentItems, {id: obj.idProduct, value: obj.alt, image: obj.image}])); 
     console.log(itemList);
@@ -87,9 +62,11 @@ export default function App() {
 
   return (
     // <View style={styles.container}>
+    <Provider store={store}>
     <View>
-      <Header title={'RUTA 40'}/>
-      {content}
+      <Header title={'ROUTE 40'}/>
+      <MainNavigator itemList={itemList} setItemList={setItemList}/>
+      {/* {content} */}
       {/* <Landing /> */}
       {/* <View style={styles.screen}>
         <View style={styles.modalButtonFrame}>
@@ -134,6 +111,7 @@ export default function App() {
         keyExtractor= {(item) => item.id}
       /> */}
     </View>
+    </Provider>
   );
 }
 
