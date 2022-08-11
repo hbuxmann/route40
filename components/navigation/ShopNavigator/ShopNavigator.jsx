@@ -17,11 +17,13 @@ const Stack = createNativeStackNavigator();
 
 
 const ShopNavigator=(props)=>{
+  
 
 const {itemList, setItemList}= props;
+console.log('Main Shop Navigator');
 return (
   // const {itemList, setItemList}= props;
- <NavigationContainer>
+//  <NavigationContainer>
    <Stack.Navigator initialRouteName="Home"
         screenOptions={{
             headerShown: false,
@@ -41,7 +43,7 @@ return (
       <Stack.Screen name="Admin" component={ItemListAdmin} itemList={itemList} setItemList={setItemList} />
       <Stack.Screen name="List" component  ={ItemList}/>
    </Stack.Navigator>
- </NavigationContainer>
+// </NavigationContainer>
 ) };
 
 

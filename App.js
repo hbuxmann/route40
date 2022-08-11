@@ -7,7 +7,8 @@ import { useFonts } from 'expo-font';
 // import Item from './components/Item/Item';
 import ItemList from './components/ItemList/ItemList';
 import ItemListAdmin from './components/ItemListAdmin/ItemListAdmin';
-import MainNavigator from './components/navigation/MainNavigator/MainNavigator'
+import ShopNavigator from './components/navigation/ShopNavigator/ShopNavigator';
+import MainNavigator from './components/navigation/index';
 
 // import db from './database/products.json';
 import {products} from './database/products';
@@ -63,9 +64,10 @@ export default function App() {
   return (
     // <View style={styles.container}>
     <Provider store={store}>
-    <View>
+    <View style={styles.container}>
       <Header title={'ROUTE 40'}/>
-      <MainNavigator itemList={itemList} setItemList={setItemList}/>
+      {/* <ShopNavigator itemList={itemList} setItemList={setItemList}/> */}
+      <MainNavigator />
       {/* {content} */}
       {/* <Landing /> */}
       {/* <View style={styles.screen}>
@@ -118,9 +120,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 
   screen: {

@@ -17,9 +17,9 @@ const ItemList = ({navigation, route}, props) => {
 
   const dispatch = useDispatch();
   const products2 = useSelector(state => state.products.products);
-  const {nombre} = route.params;
+  // const {nombre} = route.params;
   // const {setNavigateTo, products} = props;
-  console.log('Products 2: '+JSON.stringify(products2))
+  // console.log('Products 2: '+JSON.stringify(products2))
 
   // const [textItem, setTextItem] = useState ('');
   // const [itemList, setItemList] = useState ([]);
@@ -38,7 +38,7 @@ const ItemList = ({navigation, route}, props) => {
   //   // console.log('se cargó el componente');
   // }, []);
 
-  console.log('ItemList: '+nombre);
+  // console.log('ItemList: '+nombre);
     return (
       <View style={styles.screen}>
         <View style={styles.inputContainer}>
