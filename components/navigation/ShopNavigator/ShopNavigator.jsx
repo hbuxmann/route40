@@ -16,10 +16,10 @@ import ItemList from '../../ItemList/ItemList';
 const Stack = createNativeStackNavigator();
 
 
-const ShopNavigator=(props)=>{
-  
+const ShopNavigator=()=>{
 
-const {itemList, setItemList}= props;
+
+// const {itemList, setItemList}= props;
 console.log('Main Shop Navigator');
 return (
   // const {itemList, setItemList}= props;
@@ -39,8 +39,8 @@ return (
         options = {{name : 'holamundo'} } 
    >
     {/* <Stack.Navigator initialRouteName="Home"> */}
-      <Stack.Screen name="Home" component={Landing} itemList={itemList} setItemList={setItemList}/>
-      <Stack.Screen name="Admin" component={ItemListAdmin} itemList={itemList} setItemList={setItemList} />
+      <Stack.Screen name="Home" component={Landing} />
+      <Stack.Screen name="Admin" component={ItemListAdmin}  />
       <Stack.Screen name="List" component  ={ItemList}/>
    </Stack.Navigator>
 // </NavigationContainer>
